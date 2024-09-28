@@ -1,6 +1,6 @@
 provider "aws" {
   region                  = "ap-south-1"
-  shared_credentials_files = ["/Users/Rohith/.aws/credentials"]
+  shared_credentials_files = ["c:/Users/Rohith/.aws/credentials"]
 }
 
 resource "aws_iam_role" "lambda_role" {
