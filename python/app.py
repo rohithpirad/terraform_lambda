@@ -1,4 +1,3 @@
 def handler(event, context):
-    message = "event received with information {}.".format(event.get("key"))
-    print(message)
-    return {'message': message}
+    message = "successfully invoked api gateway!!".format(event.get("key"))
+    return {'status': 200, 'message': message}

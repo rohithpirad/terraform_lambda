@@ -1,25 +1,25 @@
 provider "aws" {
-  region                  = "ap-south-1"
+  region                   = "ap-south-1"
   shared_credentials_files = ["c:/Users/Rohith/.aws/credentials"]
 }
 
 resource "aws_iam_role" "lambda_role" {
   name               = "terraform_aws_lambda_role"
   assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
     {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "lambda.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": ""
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Action": "sts:AssumeRole",
+          "Principal": {
+            "Service": "lambda.amazonaws.com"
+          },
+          "Effect": "Allow",
+          "Sid": ""
+        }
+      ]
     }
-  ]
-}
-EOF
+  EOF
 }
 
 # IAM policy for logging from a lambda
@@ -30,21 +30,21 @@ resource "aws_iam_policy" "iam_policy_for_lambda" {
   path        = "/"
   description = "AWS IAM Policy for managing aws lambda role"
   policy      = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
     {
-      "Action": [
-        "logs:CreateLogGroup",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ],
-      "Resource": "arn:aws:logs:*:*:*",
-      "Effect": "Allow"
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "arn:aws:logs:*:*:*",
+          "Effect": "Allow"
+        }
+      ]
     }
-  ]
-}
-EOF
+  EOF
 }
 
 # Policy Attachment on the role.
